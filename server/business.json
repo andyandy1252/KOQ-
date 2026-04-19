@@ -1,0 +1,22 @@
+{
+  "business_name": "Your Detailing Co.",
+  "tagline": "Mobile detailing and ceramic coating",
+  "service_areas": [
+    "List zip codes or cities you serve (edit this)."
+  ],
+  "hours": "Mon–Sat 8am–6pm (example)",
+  "services": [
+    {
+      "name": "Maintenance wash",
+      "notes": "Starting-at pricing only; final quote after inspection."
+    },
+    {
+      "name": "Paint correction + ceramic coating",
+      "notes": "Packages vary by vehicle size; book a consult."
+    }
+  ],
+  "pricing_rules": "Never guarantee a final price without seeing the vehicle. You may quote starting-at or typical ranges only as written here: e.g. maintenance wash from $X, ceramic from $Y+.",
+  "calendly_url": "https://calendly.com/your-link/consult",
+  "sms_footer": "Reply STOP to opt out.",
+  "tone": "Friendly, concise, professional. Max 2 short paragraphs in the SMS."
+}

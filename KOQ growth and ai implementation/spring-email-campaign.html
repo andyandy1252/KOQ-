@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KOQ Detailing — Spring Sale</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #1a1a1a;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #f0f0f0;
+    }
+
+    .wrapper {
+      max-width: 620px;
+      margin: 0 auto;
+      background-color: #111111;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+      padding: 40px 30px 30px;
+      text-align: center;
+      border-bottom: 3px solid #c9a84c;
+    }
+
+    .logo-text {
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: 6px;
+      color: #c9a84c;
+      text-shadow: 0 0 20px rgba(201,168,76,0.4);
+    }
+
+    .logo-sub {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      color: #888;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── HERO BANNER ── */
+    .hero {
+      background: linear-gradient(160deg, #0d0d0d 0%, #1f1f1f 50%, #0d0d0d 100%);
+      padding: 50px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    }
+
+    .spring-badge {
+      display: inline-block;
+      background: #c9a84c;
+      color: #111;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 2px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      font-weight: 900;
+      line-height: 1.15;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 span {
+      color: #c9a84c;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: #aaa;
+      line-height: 1.7;
+      max-width: 460px;
+      margin: 0 auto 30px;
+    }
+
+    /* ── SALE CALLOUT ── */
+    .sale-box {
+      display: inline-block;
+      border: 2px solid #c9a84c;
+      padding: 18px 36px;
+      margin-bottom: 30px;
+      background: rgba(201,168,76,0.07);
+      border-radius: 4px;
+    }
+
+    .sale-box .amount {
+      font-size: 56px;
+      font-weight: 900;
+      color: #c9a84c;
+      line-height: 1;
+      text-shadow: 0 0 30px rgba(201,168,76,0.5);
+    }
+
+    .sale-box .off {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #c9a84c, #e8c96a);
+      color: #111111;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 16px 42px;
+      border-radius: 3px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 50px 30px;
+      background: #161616;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 10px;
+    }
+
+    .section-heading {
+      text-align: center;
+      font-size: 26px;
+      font-weight: 900;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 36px;
+    }
+
+    .service-cards {
+      display: table;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .service-card {
+      display: table-cell;
+      width: 50%;
+      vertical-align: top;
+      padding: 28px 20px;
+      background: #1e1e1e;
+      border-top: 3px solid #c9a84c;
+      text-align: center;
+    }
+
+    .service-card:first-child {
+      margin-right: 12px;
+      border-right: 1px solid #2a2a2a;
+    }
+
+    .service-icon {
+      font-size: 36px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-size: 15px;
+      font-weight: 800;
+      color: #c9a84c;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 13px;
+      color: #999;
+      line-height: 1.7;
+    }
+
+    /* ── WHY KOQ ── */
+    .why {
+      padding: 50px 30px;
+      background: #111;
+    }
+
+    .why-list {
+      list-style: none;
+      margin-top: 30px;
+    }
+
+    .why-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid #222;
+      font-size: 14px;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .why-list li:last-child { border-bottom: none; }
+
+    .check {
+      color: #c9a84c;
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .why-list strong {
+      color: #fff;
+      display: block;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    /* ── AREA ── */
+    .area {
+      background: linear-gradient(135deg, #1a1a1a, #222);
+      padding: 40px 30px;
+      text-align: center;
+      border-top: 1px solid #2a2a2a;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .area p {
+      font-size: 13px;
+      color: #888;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .area-tags {
+      font-size: 15px;
+      font-weight: 700;
+      color: #c9a84c;
+      letter-spacing: 1px;
+    }
+
+    /* ── URGENCY ── */
+    .urgency {
+      background: #c9a84c;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .urgency p {
+      color: #111;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .urgency span {
+      font-size: 22px;
+      font-weight: 900;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #0d0d0d;
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid #222;
+    }
+
+    .footer p {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .footer a {
+      color: #c9a84c;
+      text-decoration: none;
+    }
+
+    .footer .social {
+      margin: 14px 0;
+      font-size: 13px;
+      color: #888;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #c9a84c, transparent);
+      margin: 0 30px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-text">KOQ</div>
+    <div class="logo-sub">Detailing &nbsp;·&nbsp; Long Island &amp; NYC</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="spring-badge">🌿 Spring Sale — Limited Time</div>
+    <h1>Protect Your Paint.<br><span>Own the Road.</span></h1>
+    <p>
+      Professional ceramic coating and paint correction for drivers who refuse to settle.
+      Mobile service — we come to you across Long Island and all 5 boroughs.
+    </p>
+
+    <div class="sale-box">
+      <div class="amount">$400 OFF</div>
+      <div class="off">Spring Special</div>
+    </div>
+    <br/>
+    <a href="#" class="cta-btn">Book Your Detail Now</a>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SERVICES -->
+  <div class="services">
+    <div class="section-title">What We Offer</div>
+    <div class="section-heading">Our Signature Services</div>
+
+    <table class="service-cards" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td class="service-card">
+          <span class="service-icon">🛡️</span>
+          <h3>Ceramic Coating</h3>
+          <p>
+            Nano-ceramic protection that bonds to your paint for years of gloss, hydrophobic repellency,
+            and UV defense. The last coat your car will ever need.
+          </p>
+        </td>
+        <td class="service-card">
+          <span class="service-icon">✨</span>
+          <h3>Paint Correction</h3>
+          <p>
+            Multi-stage machine polishing to eliminate swirl marks, scratches, and oxidation —
+            restoring true depth and clarity before any coating goes on.
+          </p>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- WHY KOQ -->
+  <div class="why">
+    <div class="section-title">Why Choose Us</div>
+    <div class="section-heading">The KOQ Difference</div>
+
+    <ul class="why-list">
+      <li>
+        <span class="check">◆</span>
+        <div>
+          <strong>100% Mobile — We Come to You</strong>
+          No waiting at a shop. We work at your home, office, or anywhere convenient.
+        </div>
+      </li>
+      <li>
+        <span class="check">◆</span>
+        <div>
+          <strong>Serving All of Long Island &amp; NYC</strong>
+          Manhattan, Brooklyn, Queens, The Bronx, Staten Island, Nassau &amp; Suffolk counties.
+        </div>
+      </li>
+      <li>
+        <span class="check">◆</span>
+        <div>
+          <strong>Professional-Grade Products Only</strong>
+          We use industry-leading ceramic formulations trusted by enthusiasts and professionals alike.
+        </div>
+      </li>
+      <li>
+        <span class="check">◆</span>
+        <div>
+          <strong>Spring Sale — $400 Off</strong>
+          Book now and lock in the lowest price of the year on ceramic coating and paint correction packages.
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SERVICE AREA -->
+  <div class="area">
+    <p>Proudly Serving</p>
+    <div class="area-tags">
+      Long Island &nbsp;·&nbsp; Manhattan &nbsp;·&nbsp; Brooklyn &nbsp;·&nbsp; Queens &nbsp;·&nbsp; The Bronx &nbsp;·&nbsp; Staten Island
+    </div>
+  </div>
+
+  <!-- URGENCY BAR -->
+  <div class="urgency">
+    <p>
+      <span>⏳ Limited Spring Slots Available</span>
+      Book before spots fill up — $400 off ends soon.
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="social">📸 Follow us for before &amp; afters &nbsp;·&nbsp; <a href="#">@KOQDetailing</a></div>
+    <p>
+      KOQ Detailing &nbsp;·&nbsp; Mobile Service &nbsp;·&nbsp; Long Island &amp; NYC<br/>
+      <a href="mailto:ajohnson1252@icloud.com">ajohnson1252@icloud.com</a>
+    </p>
+    <br/>
+    <p style="font-size:11px; color:#333;">
+      You're receiving this because you requested info about our detailing services.<br/>
+      <a href="#">Unsubscribe</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
