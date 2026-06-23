@@ -911,13 +911,39 @@ document.addEventListener('keydown', e => {
 
 <script>
 function openLCChat() {
+  // 1. Try GoHighLevel / LeadConnector global API
+  var apis = ['LeadConnector','LCW','GHLChat','LC','hl','chatWidget','LCChatWidget'];
+  for (var a = 0; a < apis.length; a++) {
+    var api = window[apis[a]];
+    if (api && typeof api === 'object') {
+      try { if (api.openWidget) { api.openWidget(); return; } } catch(e){}
+      try { if (api.open) { api.open(); return; } } catch(e){}
+      try { if (api.show) { api.show(); return; } } catch(e){}
+      try { if (api.toggle) { api.toggle(); return; } } catch(e){}
+    }
+  }
+  // 2. Regular DOM
   var el = document.querySelector('.widget-open-icon');
   if (el) { el.click(); return; }
-  // Retry once after short delay in case widget hasn't finished loading
-  setTimeout(function() {
-    var el2 = document.querySelector('.widget-open-icon');
-    if (el2) el2.click();
-  }, 800);
+  // 3. Shadow DOM — widget may be inside a web component
+  Array.from(document.querySelectorAll('*')).forEach(function(host) {
+    if (host.shadowRoot) {
+      try {
+        var inner = host.shadowRoot.querySelector('.widget-open-icon') ||
+                    host.shadowRoot.querySelector('button') ||
+                    host.shadowRoot.querySelector('[role="button"]');
+        if (inner) inner.click();
+      } catch(e) {}
+    }
+  });
+  // 4. PostMessage to any iframes — widget launcher may be inside one
+  Array.from(document.querySelectorAll('iframe')).forEach(function(iframe) {
+    try {
+      [{type:'open-chat'},{action:'open'},{event:'open'},{type:'widget-open'}].forEach(function(msg) {
+        iframe.contentWindow.postMessage(msg, '*');
+      });
+    } catch(e) {}
+  });
 }
 </script>
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3ad3a4a2d78afbf746e00c" data-source="WEB_USER"></script>
