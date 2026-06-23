@@ -911,31 +911,13 @@ document.addEventListener('keydown', e => {
 
 <script>
 function openLCChat() {
-  var attempt = function(retry) {
-    // Try GoHighLevel / LeadConnector global API
-    if (window.LeadConnector) {
-      try { window.LeadConnector.openWidget(); return; } catch(e){}
-      try { window.LeadConnector.open(); return; } catch(e){}
-      try { window.LeadConnector.show(); return; } catch(e){}
-    }
-    if (window.hl && window.hl.chat) {
-      try { window.hl.chat.open(); return; } catch(e){}
-    }
-    // Fire custom events the widget may be listening for
-    ['lc-chat-open','lc:chat:open','leadconnector:open','chat-widget:open'].forEach(function(name) {
-      document.dispatchEvent(new CustomEvent(name, {bubbles:true}));
-    });
-    // Find and click the launcher button the widget injects into the DOM
-    var el = document.querySelector(
-      '[class*="lc-launcher"],[id*="lc-chat"],[id*="lc_chat"],' +
-      '[class*="lc_launcher"],[class*="lc-chat-widget"],[class*="leadconnector"],' +
-      '[class*="hl-chat"],[id*="leadconnector"]'
-    );
-    if (el && el.tagName.toLowerCase() !== 'script') { el.click(); return; }
-    // One retry after a short delay in case widget hasn't fully initialized
-    if (!retry) setTimeout(function() { attempt(true); }, 800);
-  };
-  attempt(false);
+  var el = document.querySelector('.widget-open-icon');
+  if (el) { el.click(); return; }
+  // Retry once after short delay in case widget hasn't finished loading
+  setTimeout(function() {
+    var el2 = document.querySelector('.widget-open-icon');
+    if (el2) el2.click();
+  }, 800);
 }
 </script>
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3ad3a4a2d78afbf746e00c" data-source="WEB_USER"></script>
