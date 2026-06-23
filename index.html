@@ -467,7 +467,7 @@
       <li><span>2</span> Tell us your vehicle or boat</li>
       <li><span>3</span> We text you a custom quote — fast</li>
     </ul>
-    <button class="btn-primary quote-cta-btn" onclick="var w=document.querySelector('[class*=lc-launcher],[class*=chat-widget-button],[id*=lc-chat]');if(w){w.click();}else{window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});}">
+    <button class="btn-primary quote-cta-btn" onclick="openLCChat()">
       START CHAT &amp; GET A QUOTE &rarr;
     </button>
   </div>
@@ -909,6 +909,35 @@ document.addEventListener('keydown', e => {
 });
 </script>
 
+<script>
+function openLCChat() {
+  var attempt = function(retry) {
+    // Try GoHighLevel / LeadConnector global API
+    if (window.LeadConnector) {
+      try { window.LeadConnector.openWidget(); return; } catch(e){}
+      try { window.LeadConnector.open(); return; } catch(e){}
+      try { window.LeadConnector.show(); return; } catch(e){}
+    }
+    if (window.hl && window.hl.chat) {
+      try { window.hl.chat.open(); return; } catch(e){}
+    }
+    // Fire custom events the widget may be listening for
+    ['lc-chat-open','lc:chat:open','leadconnector:open','chat-widget:open'].forEach(function(name) {
+      document.dispatchEvent(new CustomEvent(name, {bubbles:true}));
+    });
+    // Find and click the launcher button the widget injects into the DOM
+    var el = document.querySelector(
+      '[class*="lc-launcher"],[id*="lc-chat"],[id*="lc_chat"],' +
+      '[class*="lc_launcher"],[class*="lc-chat-widget"],[class*="leadconnector"],' +
+      '[class*="hl-chat"],[id*="leadconnector"]'
+    );
+    if (el && el.tagName.toLowerCase() !== 'script') { el.click(); return; }
+    // One retry after a short delay in case widget hasn't fully initialized
+    if (!retry) setTimeout(function() { attempt(true); }, 800);
+  };
+  attempt(false);
+}
+</script>
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3ad3a4a2d78afbf746e00c" data-source="WEB_USER"></script>
 </body>
 </html>
