@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOQ Marine Ceramic Coating — Summer Sale Flyer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black:      #080808;
+      --gold:       #C9A84C;
+      --gold-light: #e4c570;
+      --gold-dim:   rgba(201,168,76,0.15);
+      --white:      #ffffff;
+      --grey:       #aaaaaa;
+      --dark2:      #111111;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Barlow', sans-serif;
+    }
+
+    body {
+      background: #333;
+      font-family: var(--font-body);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── PRINT PAGE ── */
+    .flyer {
+      width: 8.5in;
+      min-height: 11in;
+      background: var(--black);
+      margin: 0.4in auto;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── CORNER ACCENTS ── */
+    .corner {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      z-index: 10;
+    }
+    .corner-tl { top: 18px; left: 18px;  border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .corner-tr { top: 18px; right: 18px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+    .corner-bl { bottom: 18px; left: 18px;  border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .corner-br { bottom: 18px; right: 18px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+
+    /* ── HEADER BAND ── */
+    .header {
+      background: var(--gold);
+      padding: 10px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-brand {
+      display: flex;
+      flex-direction: column;
+    }
+    .header-brand-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      letter-spacing: 0.18em;
+      color: var(--black);
+      line-height: 1;
+    }
+    .header-brand-sub {
+      font-size: 0.5rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(8,8,8,0.55);
+      margin-top: 3px;
+    }
+    .header-web {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(8,8,8,0.65);
+      font-weight: 600;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 40px 56px 30px;
+      position: relative;
+    }
+    .eyebrow {
+      font-size: 0.58rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: 4.6rem;
+      line-height: 0.88;
+      letter-spacing: 0.03em;
+      color: var(--white);
+    }
+    .hero h1 span {
+      color: var(--gold);
+      display: block;
+    }
+    .hero-sub {
+      font-size: 0.9rem;
+      color: var(--grey);
+      line-height: 1.7;
+      max-width: 430px;
+      margin-top: 16px;
+    }
+
+    /* ── SALE BOX ── */
+    .sale-box {
+      margin: 24px 56px;
+      background: var(--gold);
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .sale-label {
+      font-size: 0.52rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(8,8,8,0.6);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .sale-prices {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+    .sale-new {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--black);
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+    .sale-service {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(8,8,8,0.55);
+      margin-left: auto;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 0 56px;
+    }
+
+    /* ── TWO-COL BODY ── */
+    .body-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 28px 56px;
+      flex: 1;
+    }
+    .body-left {
+      padding-right: 32px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .body-right {
+      padding-left: 32px;
+    }
+
+    /* benefits list */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .benefit-icon {
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--gold);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .benefit-icon::after {
+      content: '✓';
+      color: var(--gold);
+      font-size: 0.5rem;
+    }
+    .benefit-text strong {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.03em;
+      margin-bottom: 2px;
+    }
+    .benefit-text span {
+      font-size: 0.72rem;
+      color: var(--grey);
+      line-height: 1.5;
+    }
+
+    /* stats */
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .stat {
+      border: 1px solid rgba(201,168,76,0.22);
+      padding: 12px 14px;
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.52rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-top: 4px;
+    }
+
+    /* testimonial */
+    .quote {
+      border-left: 2px solid var(--gold);
+      padding: 10px 14px;
+      margin-bottom: 22px;
+    }
+    .quote p {
+      font-size: 0.78rem;
+      color: #bbb;
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+    .quote-author {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── QR + CONTACT FOOTER ── */
+    .footer-band {
+      background: var(--dark2);
+      border-top: 1px solid rgba(201,168,76,0.2);
+      padding: 18px 56px;
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+    .qr-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .qr-block img {
+      width: 80px;
+      height: 80px;
+      display: block;
+      background: white;
+      padding: 4px;
+    }
+    .qr-label {
+      font-size: 0.48rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-top: 5px;
+      text-align: center;
+    }
+    .contact-items {
+      display: flex;
+      gap: 32px;
+      flex: 1;
+    }
+    .contact-item h4 {
+      font-size: 0.5rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3px;
+    }
+    .contact-item p {
+      font-size: 0.8rem;
+      color: #bbb;
+      line-height: 1.4;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .footer-logo span {
+      display: block;
+      font-size: 0.46rem;
+      letter-spacing: 0.3em;
+      color: var(--grey);
+      margin-top: 2px;
+    }
+
+    /* ── URGENCY STRIP ── */
+    .urgency {
+      background: var(--gold);
+      text-align: center;
+      padding: 8px;
+    }
+    .urgency p {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: 0.28em;
+      color: var(--black);
+    }
+
+    /* ── PRINT RULES ── */
+    @media print {
+      body { background: none; }
+      .flyer { margin: 0; width: 100%; min-height: 100vh; }
+    }
+
+    /* ── SCAN-IN-CHAT PREVIEW (not printed) ── */
+    .chat-qr-preview {
+      width: 8.5in;
+      margin: 0 auto 0.6in;
+      background: #1a1a1a;
+      border: 1px solid #C9A84C;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .chat-qr-preview img {
+      width: 120px;
+      height: 120px;
+      background: white;
+      padding: 6px;
+      flex-shrink: 0;
+    }
+    .chat-qr-text h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .chat-qr-text p {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: #aaa;
+      line-height: 1.5;
+    }
+    @media print {
+      .chat-qr-preview { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     SCAN-IN-CHAT QR (not printed)
+     ═══════════════════════════════════ -->
+<div class="chat-qr-preview">
+  <img
+    src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=0&data=https%3A%2F%2Fkoqdetailing.com"
+    alt="Scan to open KOQ website on your phone"
+  >
+  <div class="chat-qr-text">
+    <h3>SCAN TO PREVIEW ON YOUR PHONE</h3>
+    <p>
+      Scan this QR code to open <strong style="color:#C9A84C">koqdetailing.com</strong> on your phone.<br>
+      This box does <em>not</em> print — it's just for your preview. Hit <strong>Ctrl + P</strong> (or File → Print) to print the flyer below.
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     PRINTABLE FLYER
+     ═══════════════════════════════════ -->
+<div class="flyer">
+
+  <!-- corner brackets -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <!-- header bar -->
+  <div class="header">
+    <div class="header-brand">
+      <span class="header-brand-name">KOQ DETAILING &amp; COATINGS</span>
+      <span class="header-brand-sub">Kings of Queens — Mobile Ceramic Coating Specialists</span>
+    </div>
+    <div class="header-web">koqdetailing.com</div>
+  </div>
+
+  <!-- urgency strip -->
+  <div class="urgency">
+    <p>LIMITED TIME — SUMMER BOAT PREP SPECIAL</p>
+  </div>
+
+  <!-- hero -->
+  <div class="hero">
+    <div class="eyebrow">Marine Ceramic Coating</div>
+    <h1>PROTECT<br>YOUR<br><span>VESSEL</span></h1>
+    <p class="hero-sub">
+      We come to your marina, dock, or storage yard. Professional 9H ceramic coating applied directly to gel coat, hull, and deck — keeping your boat cleaner, shinier, and protected all season long.
+    </p>
+  </div>
+
+  <!-- sale box -->
+  <div class="sale-box">
+    <div class="sale-label">Limited Time<br>Summer Offer</div>
+    <div class="sale-prices">
+      <span class="sale-new">$499 OFF</span>
+    </div>
+    <div class="sale-service">
+      Any Marine Ceramic Package<br>
+      Hull · Gel Coat · Deck Surfaces
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- two-column body -->
+  <div class="body-cols">
+
+    <!-- LEFT: benefits -->
+    <div class="body-left">
+      <div class="section-title">What's Included</div>
+
+      <div class="benefit">
+        <div class="benefit-icon"></div>
+        <div class="benefit-text">
+          <strong>Gel Coat &amp; Hull Protection</strong>
+          <span>Marine-grade 9H ceramic bonds to fiberglass, blocking saltwater, UV rays, and algae that seasonal waxing can't touch.</span>
+        </div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon"></div>
+        <div class="benefit-text">
+          <strong>Hydrophobic Water Shedding</strong>
+          <span>Dirt, grime, and saltwater bead right off. Less time scrubbing means more time on the water.</span>
+        </div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon"></div>
+        <div class="benefit-text">
+          <strong>Pre-Season Prep &amp; Detail</strong>
+          <span>We'll have your boat looking showroom-fresh before summer — fully detailed, coated, and ready to launch.</span>
+        </div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon"></div>
+        <div class="benefit-text">
+          <strong>We Come to You</strong>
+          <span>No haul-outs, no drop-offs. We service your boat at your marina, dock, or storage facility.</span>
+        </div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon"></div>
+        <div class="benefit-text">
+          <strong>Long Island &amp; NYC Service Area</strong>
+          <span>Serving all 5 boroughs, Long Island marinas, and surrounding areas.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: stats + quote -->
+    <div class="body-right">
+      <div class="section-title">By the Numbers</div>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-num">5YR</span>
+          <div class="stat-label">Coating Protection</div>
+        </div>
+        <div class="stat">
+          <span class="stat-num">9H</span>
+          <div class="stat-label">Hardness Rating</div>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <div class="stat-label">Mobile Service</div>
+        </div>
+        <div class="stat">
+          <span class="stat-num">$499</span>
+          <div class="stat-label">Off Any Package</div>
+        </div>
+      </div>
+
+      <div class="quote">
+        <p>"Saltwater is relentless. Every season without protection, your gel coat oxidizes, your hull stains, and your resale value drops. A single professional ceramic coating pays for itself in time saved cleaning and money saved at resale."</p>
+        <div class="quote-author">KOQ Detailing &amp; Coatings</div>
+      </div>
+
+      <div style="font-size:0.68rem;color:var(--grey);line-height:1.6;">
+        <strong style="color:var(--white);">Scan the QR below</strong> to book online or get a free quote — or text/call us directly. Limited slots available before the season fills up.
+      </div>
+    </div>
+  </div>
+
+  <!-- footer band -->
+  <div class="footer-band">
+    <div class="qr-block">
+      <img
+        src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=0&data=https%3A%2F%2Fkoqdetailing.com"
+        alt="QR code — koqdetailing.com"
+      >
+      <div class="qr-label">Free Quote &amp; Booking</div>
+    </div>
+
+    <div class="contact-items">
+      <div class="contact-item">
+        <h4>Website</h4>
+        <p>koqdetailing.com</p>
+      </div>
+      <div class="contact-item">
+        <h4>Phone / Text</h4>
+        <p>(631) 338-1362</p>
+      </div>
+      <div class="contact-item">
+        <h4>Instagram</h4>
+        <p>@koq.detailing</p>
+      </div>
+      <div class="contact-item">
+        <h4>Service Area</h4>
+        <p>NYC · Long Island<br>All 5 Boroughs</p>
+      </div>
+    </div>
+
+    <div class="footer-logo">
+      KOQ
+      <span>Detailing &amp; Coatings</span>
+    </div>
+  </div>
+
+</div><!-- /flyer -->
+
+</body>
+</html>
