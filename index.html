@@ -66,20 +66,7 @@
     h1 span { color:var(--gold); display:block; }
     .hero-sub { font-size:1rem; color:#aaa; max-width:480px; line-height:1.6; margin-bottom:36px; }
     .hero-actions { display:flex; gap:16px; flex-wrap:wrap; }
-    .hero-chat { position:relative; z-index:2; background:rgba(8,8,8,0.88); border:1px solid rgba(201,168,76,0.25); border-radius:6px; padding:36px 32px; width:360px; flex-shrink:0; animation:fadeUp 1.2s ease-out 0.5s both; }
-    .hero-chat-title { font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
-    .hero-chat-sub { font-size:0.82rem; color:#888; margin-bottom:20px; }
-    .hero-chat .cf { width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; padding:12px 14px; font-size:0.88rem; border-radius:3px; margin-bottom:10px; font-family:inherit; box-sizing:border-box; transition:border-color 0.2s; }
-    .hero-chat .cf:focus { outline:none; border-color:rgba(201,168,76,0.5); }
-    .hero-chat .cf::placeholder { color:#555; }
-    .hero-chat textarea.cf { resize:none; height:80px; }
-    .hero-chat select.cf option { background:#111; color:#fff; }
-    .hero-chat .cf-btn { width:100%; background:var(--gold); color:#080808; border:none; padding:14px; font-size:0.8rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; border-radius:3px; cursor:pointer; transition:opacity 0.2s; margin-top:4px; }
-    .hero-chat .cf-btn:hover { opacity:0.85; }
-    .hero-chat .cf-btn:disabled { opacity:0.5; cursor:default; }
-    .hero-chat-success { display:none; text-align:center; padding:20px 0; }
-    .hero-chat-success p { color:var(--gold); font-size:0.95rem; margin-bottom:6px; }
-    .hero-chat-success span { color:#888; font-size:0.82rem; }
+    .hero-chat { position:relative; z-index:2; background:rgba(8,8,8,0.88); border:1px solid rgba(201,168,76,0.25); border-radius:8px; padding:0; width:400px; flex-shrink:0; overflow-y:auto; max-height:calc(100vh - 100px); animation:fadeUp 1.2s ease-out 0.5s both; }
     .btn-primary { background:var(--gold); color:var(--black); padding:16px 36px; font-family:var(--font-body); font-size:0.75rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; border:none; cursor:pointer; transition:background 0.2s,transform 0.2s; display:inline-block; }
     .btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); }
     .btn-outline { background:transparent; color:var(--white); padding:16px 36px; font-family:var(--font-body); font-size:0.75rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; border:1px solid rgba(255,255,255,0.3); cursor:pointer; transition:border-color 0.2s,color 0.2s; display:inline-block; }
@@ -286,28 +273,23 @@
     </div>
   </div>
   <div class="hero-chat">
-    <div class="hero-chat-title">Get a Free Quote</div>
-    <div class="hero-chat-sub">We'll respond within the hour.</div>
-    <form id="heroChatForm" action="https://formspree.io/f/xwvabjrq" method="POST">
-      <input type="hidden" name="_source" value="hero-widget">
-      <input class="cf" type="text" name="name" placeholder="Your Name" required>
-      <input class="cf" type="tel" name="phone" placeholder="Phone Number" required>
-      <select class="cf" name="service">
-        <option value="" disabled selected>Select a Service</option>
-        <option>Ceramic Coating</option>
-        <option>Paint Correction</option>
-        <option>Interior Detailing</option>
-        <option>Window Tint</option>
-        <option>Full Detail Package</option>
-        <option>Other / Not Sure</option>
-      </select>
-      <textarea class="cf" name="message" placeholder="Tell us about your vehicle & what you need..."></textarea>
-      <button type="submit" class="cf-btn">Send Message &rarr;</button>
-    </form>
-    <div class="hero-chat-success">
-      <p>Message received!</p>
-      <span>We'll be in touch shortly.</span>
-    </div>
+    <iframe
+      src="https://api.leadconnectorhq.com/widget/form/6VxSzuNLDd18TiN0izf1"
+      style="width:100%;height:837px;border:none;border-radius:8px"
+      id="inline-6VxSzuNLDd18TiN0izf1"
+      data-layout="{'id':'INLINE'}"
+      data-trigger-type="alwaysShow"
+      data-trigger-value=""
+      data-activation-type="alwaysActivated"
+      data-activation-value=""
+      data-deactivation-type="neverDeactivate"
+      data-deactivation-value=""
+      data-form-name="Form 1"
+      data-height="837"
+      data-layout-iframe-id="inline-6VxSzuNLDd18TiN0izf1"
+      data-form-id="6VxSzuNLDd18TiN0izf1"
+      title="Form 1">
+    </iframe>
   </div>
 </section>
 
@@ -987,34 +969,6 @@ function openLCChat() {
   });
 }
 </script>
-<script>
-(function(){
-  var form = document.getElementById('heroChatForm');
-  if (!form) return;
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    var btn = form.querySelector('.cf-btn');
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-    try {
-      var res = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        form.style.display = 'none';
-        form.closest('.hero-chat').querySelector('.hero-chat-success').style.display = 'block';
-      } else {
-        btn.textContent = 'Send Message →';
-        btn.disabled = false;
-      }
-    } catch(err) {
-      btn.textContent = 'Send Message →';
-      btn.disabled = false;
-    }
-  });
-})();
-</script>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
 </body>
 </html>
