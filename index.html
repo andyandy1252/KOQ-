@@ -241,12 +241,11 @@
       .lightbox-nav { display:none; }
     }
     /* BOOKING MODAL */
-    #booking-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); align-items:center; justify-content:center; padding:20px; }
-    #booking-modal.open { display:flex; }
-    .booking-modal-inner { position:relative; width:100%; max-width:780px; height:90vh; background:#fff; border-radius:8px; overflow:hidden; }
-    .booking-modal-inner iframe { width:100%; height:100%; border:none; display:block; }
-    .booking-modal-close { position:absolute; top:10px; right:14px; background:none; border:none; font-size:1.8rem; line-height:1; color:#333; cursor:pointer; z-index:10; }
-    @media(max-width:600px) { .booking-modal-inner { height:85vh; } }
+    #booking-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); overflow-y:auto; -webkit-overflow-scrolling:touch; padding:50px 20px 20px; }
+    #booking-modal.open { display:block; }
+    .booking-modal-inner { position:relative; width:100%; max-width:780px; background:#fff; border-radius:8px; margin:0 auto; }
+    .booking-modal-inner iframe { width:100%; min-height:800px; border:none; display:block; border-radius:8px; }
+    .booking-modal-close { position:absolute; top:-40px; right:0; background:none; border:none; font-size:2rem; line-height:1; color:#fff; cursor:pointer; z-index:10; }
   </style>
   <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3ad3d697c4e6b17874c5ea"></script>
 </head>
@@ -987,7 +986,7 @@ function openLCChat() {
 <script src="https://link.msgsndr.com/js/form_embed.js"></script>
 
 <!-- BOOKING MODAL -->
-<div id="booking-modal" onclick="closeBookingModal(event)">
+<div id="booking-modal">
   <div class="booking-modal-inner">
     <button class="booking-modal-close" onclick="closeBookingModal()">&times;</button>
     <iframe id="booking-iframe" src="https://api.leadconnectorhq.com/widget/service-menu/6a6e979a97e76b037d5d05a3" allow="payment" scrolling="yes"></iframe>
@@ -995,15 +994,16 @@ function openLCChat() {
 </div>
 <script>
 function openBookingModal() {
-  var modal = document.getElementById('booking-modal');
-  modal.classList.add('open');
+  document.getElementById('booking-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-function closeBookingModal(e) {
-  if (e && e.target !== document.getElementById('booking-modal')) return;
+function closeBookingModal() {
   document.getElementById('booking-modal').classList.remove('open');
   document.body.style.overflow = '';
 }
+document.getElementById('booking-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeBookingModal();
+});
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeBookingModal();
 });
