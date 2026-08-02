@@ -990,14 +990,12 @@ function openLCChat() {
 <div id="booking-modal" onclick="closeBookingModal(event)">
   <div class="booking-modal-inner">
     <button class="booking-modal-close" onclick="closeBookingModal()">&times;</button>
-    <iframe id="booking-iframe" src="" allow="payment" scrolling="no"></iframe>
+    <iframe id="booking-iframe" src="https://api.leadconnectorhq.com/widget/service-menu/6a6e979a97e76b037d5d05a3" allow="payment" scrolling="yes"></iframe>
   </div>
 </div>
 <script>
 function openBookingModal() {
   var modal = document.getElementById('booking-modal');
-  var iframe = document.getElementById('booking-iframe');
-  if (!iframe.src) iframe.src = 'https://api.leadconnectorhq.com/widget/service-menu/6a6e979a97e76b037d5d05a3';
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
