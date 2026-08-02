@@ -240,6 +240,13 @@
       .hero-content { padding:0; }
       .lightbox-nav { display:none; }
     }
+    /* BOOKING MODAL */
+    #booking-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); align-items:center; justify-content:center; padding:20px; }
+    #booking-modal.open { display:flex; }
+    .booking-modal-inner { position:relative; width:100%; max-width:780px; height:90vh; background:#fff; border-radius:8px; overflow:hidden; }
+    .booking-modal-inner iframe { width:100%; height:100%; border:none; display:block; }
+    .booking-modal-close { position:absolute; top:10px; right:14px; background:none; border:none; font-size:1.8rem; line-height:1; color:#333; cursor:pointer; z-index:10; }
+    @media(max-width:600px) { .booking-modal-inner { height:85vh; } }
   </style>
   <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3ad3d697c4e6b17874c5ea"></script>
 </head>
@@ -273,7 +280,7 @@
     <h1>CERAMIC<span>COATINGS</span>DONE RIGHT.</h1>
     <p class="hero-sub">Mobile ceramic coating specialists based in Queens. We come to you across all 5 boroughs and Long Island bringing showroom-level paint protection to your driveway.</p>
     <div class="hero-actions">
-      <a href="https://api.leadconnectorhq.com/widget/booking/lheiN4q3jS6o7IEIV8Hh" target="_blank" rel="noopener" class="btn-primary">Book Now</a>
+      <button onclick="openBookingModal()" class="btn-primary">Book Now</button>
       <a href="#gallery" class="btn-outline">See Our Work</a>
     </div>
   </div>
@@ -978,5 +985,30 @@ function openLCChat() {
 }
 </script>
 <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+
+<!-- BOOKING MODAL -->
+<div id="booking-modal" onclick="closeBookingModal(event)">
+  <div class="booking-modal-inner">
+    <button class="booking-modal-close" onclick="closeBookingModal()">&times;</button>
+    <iframe id="booking-iframe" src="" allow="payment" scrolling="no"></iframe>
+  </div>
+</div>
+<script>
+function openBookingModal() {
+  var modal = document.getElementById('booking-modal');
+  var iframe = document.getElementById('booking-iframe');
+  if (!iframe.src) iframe.src = 'https://api.leadconnectorhq.com/widget/service-menu/6a6e979a97e76b037d5d05a3';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeBookingModal(e) {
+  if (e && e.target !== document.getElementById('booking-modal')) return;
+  document.getElementById('booking-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeBookingModal();
+});
+</script>
 </body>
 </html>
