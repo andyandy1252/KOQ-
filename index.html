@@ -132,9 +132,6 @@
 
     /* GALLERY PAGE */
     #gallery { background:var(--black); }
-    .gallery-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:48px; }
-    .filter-btn { background:transparent; color:var(--light-grey); border:1px solid rgba(255,255,255,0.12); padding:10px 24px; font-family:var(--font-body); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; }
-    .filter-btn:hover, .filter-btn.active { background:var(--gold); color:var(--black); border-color:var(--gold); }
     .gallery-grid { columns:3; gap:6px; column-gap:6px; }
     .gallery-item { break-inside:avoid; margin-bottom:6px; position:relative; overflow:hidden; cursor:pointer; }
     .gallery-item.hidden { display:none; }
@@ -516,11 +513,6 @@
   <div class="section-eyebrow">Portfolio</div>
   <h2>OUR WORK</h2>
   <p class="section-intro">Real cars, real results all serviced at the client's location across Queens, NYC, and Long Island.</p>
-  <div class="gallery-filters">
-    <button class="filter-btn active" data-filter="all">All Work</button>
-    <button class="filter-btn" data-filter="Ceramic Coating">Ceramic Coating</button>
-    <button class="filter-btn" data-filter="Full Detail">Full Detail</button>
-  </div>
   <div class="gallery-grid" id="galleryGrid">
 
     <div class="gallery-item" data-tag="Ceramic Coating">
@@ -867,20 +859,6 @@
 </footer>
 
 <script>
-// Gallery filter
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-    const filter = this.dataset.filter;
-    document.querySelectorAll('.gallery-item').forEach(item => {
-      if (filter === 'all' || item.dataset.tag === filter) {
-        item.classList.remove('hidden');
-      } else {
-        item.classList.add('hidden');
-      }
-    });
-  });
 });
 
 // Lightbox
