@@ -241,11 +241,11 @@
       .lightbox-nav { display:none; }
     }
     /* BOOKING MODAL */
-    #booking-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); overflow:hidden; padding:50px 20px 20px; box-sizing:border-box; }
+    #booking-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); overflow-y:scroll; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
     #booking-modal.open { display:block; }
-    .booking-modal-inner { position:relative; width:100%; max-width:780px; background:#fff; border-radius:8px; margin:0 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; max-height:calc(100vh - 70px); }
-    .booking-modal-inner iframe { width:100%; min-height:700px; border:none; display:block; border-radius:8px; }
-    .booking-modal-close { position:absolute; top:-40px; right:0; background:none; border:none; font-size:2rem; line-height:1; color:#fff; cursor:pointer; z-index:10; }
+    .booking-modal-inner { position:relative; width:100%; max-width:780px; background:#fff; border-radius:8px; margin:56px auto 30px; }
+    .booking-modal-inner iframe { width:100%; min-height:900px; border:none; display:block; border-radius:8px; }
+    .booking-modal-close { position:fixed; top:12px; right:16px; background:none; border:none; font-size:2.4rem; line-height:1; color:#fff; cursor:pointer; z-index:10000; }
   </style>
   <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3ad3d697c4e6b17874c5ea"></script>
 </head>
