@@ -60,7 +60,7 @@
     .hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(8,8,8,0.3) 0%,rgba(8,8,8,0.1) 40%,rgba(8,8,8,0.85) 80%,rgba(8,8,8,1) 100%); }
     .hero-content { position:relative; z-index:2; padding:0; flex:1; min-width:0; animation:fadeUp 1.2s ease-out 0.3s both; }
     .hero-form-wrap { position:relative; z-index:2; flex:0 0 680px; width:680px; animation:fadeUp 1.2s ease-out 0.5s both; }
-    .hero-form-inner { height:620px; overflow-y:auto; border-radius:8px; scrollbar-width:thin; scrollbar-color:rgba(201,168,76,0.4) rgba(255,255,255,0.05); }
+    .hero-form-inner { height:620px; overflow-y:auto; border-radius:0 0 8px 8px; scrollbar-width:thin; scrollbar-color:rgba(201,168,76,0.4) rgba(255,255,255,0.05); }
     .hero-form-inner::-webkit-scrollbar { width:5px; }
     .hero-form-inner::-webkit-scrollbar-track { background:rgba(255,255,255,0.05); border-radius:8px; }
     .hero-form-inner::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.4); border-radius:8px; }
@@ -241,10 +241,10 @@
       .lightbox-nav { display:none; }
     }
     /* BOOKING MODAL */
-    #booking-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); overflow-y:auto; -webkit-overflow-scrolling:touch; padding:50px 20px 20px; }
+    #booking-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); overflow:hidden; padding:50px 20px 20px; box-sizing:border-box; }
     #booking-modal.open { display:block; }
-    .booking-modal-inner { position:relative; width:100%; max-width:780px; background:#fff; border-radius:8px; margin:0 auto; }
-    .booking-modal-inner iframe { width:100%; min-height:800px; border:none; display:block; border-radius:8px; }
+    .booking-modal-inner { position:relative; width:100%; max-width:780px; background:#fff; border-radius:8px; margin:0 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; max-height:calc(100vh - 70px); }
+    .booking-modal-inner iframe { width:100%; min-height:700px; border:none; display:block; border-radius:8px; }
     .booking-modal-close { position:absolute; top:-40px; right:0; background:none; border:none; font-size:2rem; line-height:1; color:#fff; cursor:pointer; z-index:10; }
   </style>
   <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3ad3d697c4e6b17874c5ea"></script>
@@ -284,11 +284,11 @@
     </div>
   </div>
   <div class="hero-form-wrap">
-    <a href="#home" class="btn-primary" style="display:inline-block;margin-bottom:12px;">Get a Free Quote Below</a>
-    <div class="hero-form-inner">
+    <div style="display:block;background:var(--gold);color:var(--black);padding:13px 24px;font-family:var(--font-body);font-size:0.68rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;border-radius:6px 6px 0 0;text-align:center;">Get a Free Quote</div>
+    <div class="hero-form-inner" style="border-radius:0 0 8px 8px;">
       <iframe
         src="https://api.leadconnectorhq.com/widget/form/6VxSzuNLDd18TiN0izf1"
-        style="width:100%;height:837px;border:none;border-radius:8px"
+        style="width:100%;height:837px;border:none;border-radius:0 0 8px 8px"
         id="inline-6VxSzuNLDd18TiN0izf1"
         data-layout="{'id':'INLINE'}"
         data-trigger-type="alwaysShow"
@@ -313,7 +313,7 @@
   <div class="stat-item"><span class="stat-num">5YR</span><span class="stat-label">Coating Warranty</span></div>
   <div class="stat-item"><span class="stat-num">5</span><span class="stat-label">NYC Boroughs Served</span></div>
   <div class="stat-item"><span class="stat-num">LI</span><span class="stat-label">All of Long Island</span></div>
-  <div class="stat-item" style="background:rgba(201,168,76,0.05);"><span class="stat-was">&#36;1,499</span><span class="stat-sale-num">&#36;999</span><span class="stat-label">Ceramic Coating Sale</span></div>
+  <div class="stat-item" style="background:rgba(201,168,76,0.05);"><span class="stat-was">&#36;1,199</span><span class="stat-sale-num"><strong>&#36;799</strong></span><span class="stat-label">Ceramic Coating Sale</span></div>
 </div>
 
 <!-- SERVICES -->
@@ -989,11 +989,15 @@ function openLCChat() {
 <div id="booking-modal">
   <div class="booking-modal-inner">
     <button class="booking-modal-close" onclick="closeBookingModal()">&times;</button>
-    <iframe id="booking-iframe" src="https://api.leadconnectorhq.com/widget/service-menu/6a6e979a97e76b037d5d05a3" allow="payment" scrolling="yes"></iframe>
+    <iframe id="booking-iframe" allow="payment" scrolling="yes"></iframe>
   </div>
 </div>
 <script>
 function openBookingModal() {
+  var iframe = document.getElementById('booking-iframe');
+  if (!iframe.getAttribute('src')) {
+    iframe.setAttribute('src', 'https://api.leadconnectorhq.com/widget/service-menu/6a6e979a97e76b037d5d05a3');
+  }
   document.getElementById('booking-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
