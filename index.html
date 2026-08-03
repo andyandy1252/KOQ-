@@ -241,11 +241,13 @@
       .lightbox-nav { display:none; }
     }
     /* BOOKING MODAL */
-    #booking-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); overflow-y:scroll; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
+    #booking-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); overflow-y:scroll; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; padding:16px 12px 40px; box-sizing:border-box; }
     #booking-modal.open { display:block; }
-    .booking-modal-inner { position:relative; width:100%; max-width:780px; background:#fff; border-radius:8px; margin:56px auto 30px; }
-    .booking-modal-inner iframe { width:100%; min-height:900px; border:none; display:block; border-radius:8px; }
-    .booking-modal-close { position:fixed; top:12px; right:16px; background:none; border:none; font-size:2.4rem; line-height:1; color:#fff; cursor:pointer; z-index:10000; }
+    .booking-modal-inner { width:100%; max-width:780px; background:#fff; border-radius:8px; margin:0 auto; }
+    .booking-modal-header { display:flex; align-items:center; justify-content:space-between; padding:13px 16px; background:var(--gold); border-radius:8px 8px 0 0; }
+    .booking-modal-header span { font-size:0.68rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--black); }
+    .booking-modal-close { background:none; border:none; font-size:2rem; line-height:1; color:var(--black); cursor:pointer; padding:0; }
+    .booking-modal-inner iframe { width:100%; min-height:1400px; border:none; display:block; border-radius:0 0 8px 8px; }
   </style>
   <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a3ad3d697c4e6b17874c5ea"></script>
 </head>
@@ -988,8 +990,11 @@ function openLCChat() {
 <!-- BOOKING MODAL -->
 <div id="booking-modal">
   <div class="booking-modal-inner">
-    <button class="booking-modal-close" onclick="closeBookingModal()">&times;</button>
-    <iframe id="booking-iframe" allow="payment" scrolling="yes"></iframe>
+    <div class="booking-modal-header">
+      <span>Book a Service</span>
+      <button class="booking-modal-close" onclick="closeBookingModal()">&times;</button>
+    </div>
+    <iframe id="booking-iframe" allow="payment" scrolling="no"></iframe>
   </div>
 </div>
 <script>
