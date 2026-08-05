@@ -59,11 +59,6 @@
     @keyframes heroZoom { from{transform:scale(1.08)} to{transform:scale(1.0)} }
     .hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(8,8,8,0.3) 0%,rgba(8,8,8,0.1) 40%,rgba(8,8,8,0.85) 80%,rgba(8,8,8,1) 100%); }
     .hero-content { position:relative; z-index:2; padding:0; flex:1; min-width:0; animation:fadeUp 1.2s ease-out 0.3s both; }
-    .hero-form-wrap { position:relative; z-index:2; flex:0 0 680px; width:680px; animation:fadeUp 1.2s ease-out 0.5s both; }
-    .hero-form-inner { height:620px; overflow-y:auto; border-radius:0 0 8px 8px; scrollbar-width:thin; scrollbar-color:rgba(201,168,76,0.4) rgba(255,255,255,0.05); }
-    .hero-form-inner::-webkit-scrollbar { width:5px; }
-    .hero-form-inner::-webkit-scrollbar-track { background:rgba(255,255,255,0.05); border-radius:8px; }
-    .hero-form-inner::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.4); border-radius:8px; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
     .hero-eyebrow { font-size:0.7rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:12px; }
     .hero-eyebrow::before { content:''; display:block; width:40px; height:1px; background:var(--gold); }
@@ -227,8 +222,6 @@
     }
     @media(max-width:1100px) {
       .hero { flex-direction:column; align-items:flex-start; padding:140px 6% 60px; gap:40px; }
-      .hero-form-wrap { width:100%; flex:none; }
-      .hero-form-inner { height:auto; overflow-y:visible; }
     }
     @media(max-width:600px) {
       .form-row { grid-template-columns:1fr; }
@@ -279,29 +272,8 @@
     <p class="hero-sub">Mobile ceramic coating specialists based in Queens. We come to you across all 5 boroughs and Long Island bringing showroom-level paint protection to your driveway.</p>
     <div class="hero-actions">
       <button onclick="openBookingModal()" class="btn-primary">Book Now</button>
+      <button onclick="openLCChat()" class="btn-primary">Get a Free Quote</button>
       <a href="#gallery" class="btn-outline">See Our Work</a>
-    </div>
-  </div>
-  <div class="hero-form-wrap">
-    <div style="display:block;background:var(--gold);color:var(--black);padding:13px 24px;font-family:var(--font-body);font-size:0.68rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;border-radius:6px 6px 0 0;text-align:center;">Get a Free Quote</div>
-    <div class="hero-form-inner" style="border-radius:0 0 8px 8px;">
-      <iframe
-        src="https://api.leadconnectorhq.com/widget/form/6VxSzuNLDd18TiN0izf1"
-        style="width:100%;height:837px;border:none;border-radius:0 0 8px 8px"
-        id="inline-6VxSzuNLDd18TiN0izf1"
-        data-layout="{'id':'INLINE'}"
-        data-trigger-type="alwaysShow"
-        data-trigger-value=""
-        data-activation-type="alwaysActivated"
-        data-activation-value=""
-        data-deactivation-type="neverDeactivate"
-        data-deactivation-value=""
-        data-form-name="Form 1"
-        data-height="837"
-        data-layout-iframe-id="inline-6VxSzuNLDd18TiN0izf1"
-        data-form-id="6VxSzuNLDd18TiN0izf1"
-        title="Form 1">
-      </iframe>
     </div>
   </div>
 </section>
