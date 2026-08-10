@@ -85,53 +85,27 @@
       color: var(--light-grey); margin-bottom: 28px; text-align: center;
     }
     .proc-video-outer {
-      position: relative;
       width: 100%; max-width: 1100px;
       border-radius: 12px; overflow: hidden;
       border: 2px solid rgba(201,168,76,0.4);
       box-shadow: 0 0 80px rgba(201,168,76,0.12), 0 32px 80px rgba(0,0,0,0.7);
-      cursor: pointer;
-      background: #0a0a0a;
+      background: #000;
+      aspect-ratio: 16/9;
     }
     .proc-video-outer iframe {
-      display: block; width: 100%;
-      aspect-ratio: 16/9;
+      display: block; width: 100%; height: 100%;
       border: none;
     }
-
-    /* Thumbnail overlay */
-    .proc-thumb {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
+    .btn-click-here {
+      display: inline-block; margin-top: 24px;
+      background: var(--gold); color: var(--black);
+      font-family: var(--font-body); font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+      padding: 16px 44px; border-radius: 6px;
+      transition: background 0.18s ease, transform 0.18s ease;
+      box-shadow: 0 0 28px rgba(201,168,76,0.2);
     }
-    .proc-thumb img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-    .proc-thumb-gradient {
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(8,8,8,0.1) 0%, rgba(8,8,8,0.5) 100%);
-    }
-    .proc-play-btn {
-      position: relative; z-index: 2;
-      width: 96px; height: 96px;
-      background: var(--gold);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      transition: transform 0.2s ease, background 0.2s ease;
-      box-shadow: 0 0 0 16px rgba(201,168,76,0.2), 0 8px 40px rgba(0,0,0,0.5);
-    }
-    .proc-video-outer:hover .proc-play-btn {
-      transform: scale(1.1);
-      background: var(--gold-light);
-    }
-    .proc-play-btn svg { width: 34px; height: 34px; fill: #111; margin-left: 5px; }
-    .proc-video-caption {
-      margin-top: 16px;
-      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--light-grey); text-align: center;
-    }
+    .btn-click-here:hover { background: var(--gold-light); transform: translateY(-2px); }
 
     /* ── STEPS ── */
     .proc-steps {
@@ -274,32 +248,17 @@
   <section class="proc-video-wrap">
     <h2 class="proc-video-heading">Watch the <span>Full Process</span></h2>
     <div class="proc-video-label">3-minute walkthrough &mdash; filmed in Queens, NY</div>
-    <div class="proc-video-outer" id="video-container" onclick="playVideo()">
-      <!-- Actual embed (hidden until play) -->
+    <div class="proc-video-outer">
       <iframe
-        id="yt-frame"
-        src="about:blank"
+        src="https://www.youtube.com/embed/57udEsVFedI?rel=0&modestbranding=1"
+        title="KOQ Detailing & Coatings — Full Ceramic Coating Process"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
-        style="display:none; aspect-ratio:16/9; width:100%;"
       ></iframe>
-
-      <!-- Thumbnail overlay -->
-      <div class="proc-thumb" id="video-thumb">
-        <img
-          src="https://img.youtube.com/vi/57udEsVFedI/maxresdefault.jpg"
-          alt="KOQ Detailing Process — watch our full ceramic coating walkthrough"
-          loading="lazy"
-        >
-        <div class="proc-thumb-gradient"></div>
-        <div class="proc-play-btn">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-        </div>
-      </div>
     </div>
-    <div class="proc-video-caption">Full ceramic coating process &mdash; filmed in Queens, NY</div>
+    <a class="btn-click-here" href="https://youtu.be/57udEsVFedI" target="_blank" rel="noopener">
+      Click Here to Watch on YouTube
+    </a>
   </section>
 
   <!-- STEPS -->
@@ -352,18 +311,6 @@
   <a href="index.html#contact">Contact</a>
 </footer>
 
-<script>
-function playVideo() {
-  var thumb = document.getElementById('video-thumb');
-  var frame = document.getElementById('yt-frame');
-  var container = document.getElementById('video-container');
-  thumb.style.display = 'none';
-  frame.style.display = 'block';
-  frame.src = 'https://www.youtube.com/embed/57udEsVFedI?autoplay=1&rel=0&modestbranding=1';
-  container.style.cursor = 'default';
-  container.onclick = null;
-}
-</script>
 
 <!--
   ============================================================================
