@@ -967,5 +967,358 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeBookingModal();
 });
 </script>
+
+<!--
+  ============================================================================
+  KoQ — Custom "Book a Service" menu
+  ============================================================================
+
+  WHAT THIS DOES
+  Replaces the GoHighLevel service-menu popup that currently opens from the
+  "Book Now" button. Renders our own menu (grouped, branded, priced), and each
+  Book button deep-links to that service's GHL booking widget for date, time
+  and the $50 deposit. The GHL booking step is unchanged.
+
+  WHERE IT GOES
+  Paste this whole block immediately before the closing </body> tag of the
+  homepage. One insertion point, nothing else in the page needs to change.
+  It finds the existing "Book Now" button itself and takes over its click.
+
+  WHY IT'S SAFE
+  - Everything is namespaced .koqsm- so it cannot collide with existing CSS.
+  - It only intercepts buttons whose text is exactly "Book Now".
+  - If it finds no such button it does nothing at all — no errors.
+  - Delete the block to revert completely.
+
+  TO CHANGE PRICES OR COPY LATER
+  Edit the KOQ_SERVICES array near the bottom. Nothing else.
+
+  NOTE: prices here must stay in sync with the GHL calendars. Current as of
+  this version: 250 / 340 / 495 / 595 / 795 / 795 / 1195.
+  ============================================================================
+-->
+
+<!-- ===================== KoQ service menu — styles ====================== -->
+<style>
+  .koqsm-overlay{
+    --koqsm-black:#080808; --koqsm-panel:#111111; --koqsm-panel2:#1a1a1a;
+    --koqsm-line:#2a2a2a;  --koqsm-gold:#C9A84C;  --koqsm-gold2:#E8C96A;
+    --koqsm-text:#f0f0f0;  --koqsm-muted:#888888;
+    --koqsm-display:'Oswald','Arial Narrow',Impact,sans-serif;
+    --koqsm-body:'Barlow',-apple-system,BlinkMacSystemFont,sans-serif;
+
+    position:fixed; inset:0; z-index:99999;
+    display:none; align-items:flex-start; justify-content:center;
+    background:rgba(0,0,0,.82); backdrop-filter:blur(3px);
+    overflow-y:auto; padding:40px 16px;
+    font-family:var(--koqsm-body);
+    -webkit-font-smoothing:antialiased;
+  }
+  .koqsm-overlay.koqsm-open{display:flex;}
+  .koqsm-overlay *{box-sizing:border-box;margin:0;padding:0;}
+
+  .koqsm-modal{
+    position:relative; width:100%; max-width:1120px;
+    background:var(--koqsm-black); color:var(--koqsm-text);
+    border:1px solid var(--koqsm-line); border-radius:14px;
+    padding:44px 34px 40px; margin:auto;
+  }
+
+  .koqsm-close{
+    position:absolute; top:16px; right:16px;
+    width:38px; height:38px; border-radius:8px; cursor:pointer;
+    background:transparent; border:1px solid var(--koqsm-line);
+    color:var(--koqsm-text); font-size:20px; line-height:1;
+    transition:border-color .16s ease,color .16s ease;
+  }
+  .koqsm-close:hover{border-color:var(--koqsm-gold); color:var(--koqsm-gold);}
+
+  .koqsm-eyebrow{
+    font-size:11.5px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--koqsm-gold); font-weight:600; margin-bottom:12px;
+  }
+  .koqsm-title{
+    font-family:var(--koqsm-display); font-weight:700;
+    font-size:clamp(30px,4.4vw,46px); line-height:1.02;
+    text-transform:uppercase; margin-bottom:14px;
+  }
+  .koqsm-title span{color:var(--koqsm-gold);}
+  .koqsm-lede{max-width:600px;color:var(--koqsm-muted);font-size:15.5px;line-height:1.62;}
+  .koqsm-rule{height:2px;width:60px;background:var(--koqsm-gold);margin:24px 0 4px;border-radius:2px;}
+
+  .koqsm-group{margin-top:44px;}
+  .koqsm-ghead{
+    display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+    padding-bottom:12px; margin-bottom:22px; border-bottom:1px solid var(--koqsm-line);
+  }
+  .koqsm-gname{
+    font-family:var(--koqsm-display); font-size:19px; font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase;
+  }
+  .koqsm-gnote{font-size:13px;color:var(--koqsm-muted);}
+
+  .koqsm-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));}
+
+  .koqsm-card{
+    position:relative; display:flex; flex-direction:column;
+    background:var(--koqsm-panel); border:1px solid var(--koqsm-line);
+    border-radius:11px; padding:22px 20px 18px;
+    transition:border-color .18s ease,transform .18s ease,background .18s ease;
+  }
+  .koqsm-card:hover{border-color:var(--koqsm-gold);background:var(--koqsm-panel2);transform:translateY(-3px);}
+  .koqsm-card.koqsm-feature{border-color:var(--koqsm-gold);background:linear-gradient(180deg,#191509 0%,var(--koqsm-panel2) 62%);}
+
+  .koqsm-flag{
+    position:absolute; top:-10px; right:16px;
+    background:var(--koqsm-gold); color:#111;
+    font-size:10px; font-weight:800; letter-spacing:.14em;
+    text-transform:uppercase; padding:5px 10px; border-radius:4px;
+  }
+
+  .koqsm-name{
+    font-family:var(--koqsm-display); font-size:20px; font-weight:600;
+    line-height:1.2; letter-spacing:.03em; text-transform:uppercase; margin-bottom:4px;
+  }
+  .koqsm-sub{font-size:11.5px;color:var(--koqsm-gold2);letter-spacing:.05em;margin-bottom:13px;}
+  .koqsm-desc{font-size:14px;line-height:1.6;color:var(--koqsm-muted);margin-bottom:18px;flex:1;}
+
+  .koqsm-meta{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding-top:14px;border-top:1px solid var(--koqsm-line);
+  }
+  .koqsm-pricewrap{display:flex;align-items:baseline;gap:9px;}
+  .koqsm-price{font-family:var(--koqsm-display);font-size:25px;font-weight:700;}
+  .koqsm-dur{font-size:12px;color:var(--koqsm-muted);white-space:nowrap;}
+
+  .koqsm-book{
+    display:inline-block;text-decoration:none;cursor:pointer;
+    background:var(--koqsm-gold);color:#111;
+    font-family:var(--koqsm-body);font-size:12px;font-weight:800;
+    letter-spacing:.13em;text-transform:uppercase;
+    padding:11px 19px;border:none;border-radius:6px;white-space:nowrap;
+    transition:background .16s ease;
+  }
+  .koqsm-book:hover{background:var(--koqsm-gold2);}
+
+  .koqsm-foot{
+    margin-top:40px;padding-top:20px;border-top:1px solid var(--koqsm-line);
+    font-size:13px;color:var(--koqsm-muted);line-height:1.7;
+  }
+  .koqsm-foot strong{color:var(--koqsm-text);font-weight:600;}
+
+  @media (max-width:600px){
+    .koqsm-overlay{padding:16px 10px;}
+    .koqsm-modal{padding:38px 18px 30px;}
+    .koqsm-meta{flex-direction:column;align-items:flex-start;gap:12px;}
+    .koqsm-book{width:100%;text-align:center;}
+  }
+</style>
+
+<!-- ===================== KoQ service menu — script ====================== -->
+<script>
+(function () {
+  'use strict';
+
+  /* ------------------------------------------------------------------
+     SERVICES — edit prices, copy and links here. Nothing else.
+     ------------------------------------------------------------------ */
+  var KOQ_SERVICES = [
+    /* ---- CERAMIC COATINGS ---- */
+    {
+      group:'coating',
+      name:'2 Year Ceramic Coating',
+      sub:'Decon + 1-Step Correction + Coating',
+      desc:'Full decontamination and a 1-Step Paint Correction, then a professional-grade ceramic coating bonded over the corrected finish. Two years of protection against UV, chemicals and road grime.',
+      price:'$795', duration:'5 hrs',
+      link:'https://api.leadconnectorhq.com/widget/booking/cX2ku258VTkVTCqXCEQG'
+    },
+    {
+      group:'coating',
+      name:'5 Year Ceramic Coating',
+      sub:'Decon + 1-Step Correction + Premium Coating',
+      desc:'Our longest-lasting coating. Same full prep and correction, finished with a thicker, more durable ceramic layer — five years of protection, deeper gloss and stronger water behaviour.',
+      price:'$1,195', duration:'5 hrs',
+      link:'https://api.leadconnectorhq.com/widget/booking/daRtezdwkXeTMSVnUDRO',
+      feature:true, flag:'Most Protection'
+    },
+
+    /* ---- PAINT CORRECTION ---- */
+    {
+      group:'correction',
+      name:'Paint Refresh',
+      sub:'1-Step Paint Correction',
+      desc:'A single-stage machine polish that removes roughly 65 to 70 percent of swirl marks and light defects while boosting gloss. Best for newer vehicles or paint already in decent shape.',
+      price:'$495', duration:'3 hrs',
+      link:'https://api.leadconnectorhq.com/widget/booking/wI1YhJdGAelMzsVLcWyS'
+    },
+    {
+      group:'correction',
+      name:'Shine and Protect',
+      sub:'1-Step Correction + 6-Month Ceramic Wax',
+      desc:'The same single-stage polish, finished with a 6-month ceramic wax so the corrected paint is actually protected. The easiest way to see what a coating does before committing to one.',
+      price:'$595', duration:'3 hrs',
+      link:'https://api.leadconnectorhq.com/widget/booking/Nzeup53LfSzCG2SxolWC',
+      feature:true, flag:'Best Value'
+    },
+    {
+      group:'correction',
+      name:'Paint Reset',
+      sub:'2-Step Paint Correction',
+      desc:'A cutting stage followed by a finishing stage. Removes roughly 90 to 95 percent of swirls, scratches and oxidation — the deepest correction we offer on its own.',
+      price:'$795', duration:'3 hrs',
+      link:'https://api.leadconnectorhq.com/widget/booking/Q6MkIEQ2aR9AtdjQ6KJ4'
+    },
+
+    /* ---- DETAILING ---- */
+    {
+      group:'detailing',
+      name:'Interior & Exterior Detailing',
+      sub:'Full clean, inside and out',
+      desc:'A complete top-to-bottom cleaning. Outside: wheels, foam bath, hand wash and windows. Inside: full vacuum, compressed air blowout and rejuvenation of every interior surface.',
+      price:'$250', duration:'2 hrs',
+      link:'https://api.leadconnectorhq.com/widget/booking/GnXOTRIMKCqbKIkX5Xla'
+    },
+    {
+      group:'detailing',
+      name:'Shampoo & Condition',
+      sub:'Deep interior restoration',
+      desc:'Everything in the Interior & Exterior Detail, plus clay bar on the exterior and a far deeper interior: steam clean, shampooing of carpets and upholstery, conditioning and pet hair removal.',
+      price:'$340', duration:'3 hrs',
+      link:'https://api.leadconnectorhq.com/widget/booking/o214gtmxgSQJWSdn2e8O'
+    }
+  ];
+
+  var GROUPS = [
+    { key:'coating',    name:'Ceramic Coatings',  note:'Correction plus long-term protection — our flagship work' },
+    { key:'correction', name:'Paint Correction',  note:'Machine polishing to remove swirls and restore gloss' },
+    { key:'detailing',  name:'Detailing',         note:'Cleaning and interior work — no paint correction' }
+  ];
+
+  /* ------------------------------------------------------------------ */
+
+  var overlay = null;
+
+  function esc(s){
+    return String(s).replace(/[&<>"]/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+    });
+  }
+
+  function loadFont(){
+    if (document.getElementById('koqsm-font')) return;
+    var l = document.createElement('link');
+    l.id = 'koqsm-font';
+    l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow:wght@400;600;700&display=swap';
+    document.head.appendChild(l);
+  }
+
+  function cardHTML(s){
+    return '<article class="koqsm-card' + (s.feature ? ' koqsm-feature' : '') + '">' +
+      (s.flag ? '<div class="koqsm-flag">' + esc(s.flag) + '</div>' : '') +
+      '<h3 class="koqsm-name">' + esc(s.name) + '</h3>' +
+      '<div class="koqsm-sub">' + esc(s.sub) + '</div>' +
+      '<p class="koqsm-desc">' + esc(s.desc) + '</p>' +
+      '<div class="koqsm-meta">' +
+        '<div class="koqsm-pricewrap">' +
+          '<div class="koqsm-price">' + esc(s.price) + '</div>' +
+          '<div class="koqsm-dur">' + esc(s.duration) + '</div>' +
+        '</div>' +
+        '<a class="koqsm-book" href="' + esc(s.link) + '" target="_blank" rel="noopener">Book</a>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function build(){
+    if (overlay) return overlay;
+    loadFont();
+
+    var groupsHTML = GROUPS.map(function(g){
+      var cards = KOQ_SERVICES.filter(function(s){ return s.group === g.key; })
+                              .map(cardHTML).join('');
+      if (!cards) return '';
+      return '<section class="koqsm-group">' +
+               '<div class="koqsm-ghead">' +
+                 '<div class="koqsm-gname">' + esc(g.name) + '</div>' +
+                 '<div class="koqsm-gnote">' + esc(g.note) + '</div>' +
+               '</div>' +
+               '<div class="koqsm-grid">' + cards + '</div>' +
+             '</section>';
+    }).join('');
+
+    overlay = document.createElement('div');
+    overlay.className = 'koqsm-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Book a service');
+    overlay.innerHTML =
+      '<div class="koqsm-modal">' +
+        '<button class="koqsm-close" aria-label="Close">&#10005;</button>' +
+        '<div class="koqsm-eyebrow">KoQ Detailing &amp; Coatings</div>' +
+        '<h2 class="koqsm-title">Book a <span>Service</span></h2>' +
+        '<p class="koqsm-lede">100% mobile. We come to your driveway anywhere in Queens, NYC and Long Island — fully self-contained, showroom-level results without you leaving home.</p>' +
+        '<div class="koqsm-rule"></div>' +
+        groupsHTML +
+        '<div class="koqsm-foot"><strong>A $50 deposit holds your appointment.</strong> Refundable with 48 hours notice. Pricing is flat and does not change based on vehicle size. Every job is agreed in writing before we start — no surprise upcharges.</div>' +
+      '</div>';
+
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', function(e){
+      if (e.target === overlay || e.target.classList.contains('koqsm-close')) close();
+    });
+
+    return overlay;
+  }
+
+  function open(){
+    build().classList.add('koqsm-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close(){
+    if (!overlay) return;
+    overlay.classList.remove('koqsm-open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') close();
+  });
+
+  /* Take over the existing "Book Now" button(s). Capture phase +
+     stopImmediatePropagation so the old GHL popup handler never fires. */
+  function wire(){
+    var hits = 0;
+    Array.prototype.forEach.call(document.querySelectorAll('button, a'), function(el){
+      if (el.closest('.koqsm-overlay')) return;
+      var t = (el.textContent || '').trim().toLowerCase();
+      if (t !== 'book now') return;
+      el.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        open();
+      }, true);
+      hits++;
+    });
+    return hits;
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wire);
+  } else {
+    wire();
+  }
+
+  /* Optional manual trigger: add data-koq-book to any element. */
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-koq-book]');
+    if (t) { e.preventDefault(); open(); }
+  });
+
+  window.KOQServiceMenu = { open: open, close: close };
+})();
+</script>
+<!-- =================== end KoQ service menu block ====================== -->
 </body>
 </html>
