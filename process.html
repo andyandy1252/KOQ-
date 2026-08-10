@@ -40,7 +40,7 @@
     /* ── HERO ── */
     .proc-hero {
       position: relative;
-      padding: 100px 5% 80px;
+      padding: 80px 5% 40px;
       text-align: center;
       overflow: hidden;
     }
@@ -70,20 +70,28 @@
 
     /* ── VIDEO SECTION ── */
     .proc-video-wrap {
-      padding: 72px 5%;
+      padding: 20px 4% 60px;
       display: flex; flex-direction: column; align-items: center;
     }
+    .proc-video-heading {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--white); text-align: center; margin-bottom: 6px;
+    }
+    .proc-video-heading span { color: var(--gold); }
     .proc-video-label {
-      font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 20px;
+      font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--light-grey); margin-bottom: 28px; text-align: center;
     }
     .proc-video-outer {
       position: relative;
-      width: 100%; max-width: 900px;
-      border-radius: 14px; overflow: hidden;
-      border: 1px solid rgba(201,168,76,0.25);
-      box-shadow: 0 0 60px rgba(201,168,76,0.08), 0 24px 60px rgba(0,0,0,0.6);
+      width: 100%; max-width: 1100px;
+      border-radius: 12px; overflow: hidden;
+      border: 2px solid rgba(201,168,76,0.4);
+      box-shadow: 0 0 80px rgba(201,168,76,0.12), 0 32px 80px rgba(0,0,0,0.7);
       cursor: pointer;
+      background: #0a0a0a;
     }
     .proc-video-outer iframe {
       display: block; width: 100%;
@@ -95,7 +103,6 @@
     .proc-thumb {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.3s ease;
     }
     .proc-thumb img {
       position: absolute; inset: 0;
@@ -104,26 +111,26 @@
     }
     .proc-thumb-gradient {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(8,8,8,0.15) 0%, rgba(8,8,8,0.55) 100%);
+      background: linear-gradient(to bottom, rgba(8,8,8,0.1) 0%, rgba(8,8,8,0.5) 100%);
     }
     .proc-play-btn {
       position: relative; z-index: 2;
-      width: 80px; height: 80px;
+      width: 96px; height: 96px;
       background: var(--gold);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       transition: transform 0.2s ease, background 0.2s ease;
-      box-shadow: 0 0 0 12px rgba(201,168,76,0.18);
+      box-shadow: 0 0 0 16px rgba(201,168,76,0.2), 0 8px 40px rgba(0,0,0,0.5);
     }
     .proc-video-outer:hover .proc-play-btn {
       transform: scale(1.1);
       background: var(--gold-light);
     }
-    .proc-play-btn svg { width: 28px; height: 28px; fill: #111; margin-left: 4px; }
+    .proc-play-btn svg { width: 34px; height: 34px; fill: #111; margin-left: 5px; }
     .proc-video-caption {
-      margin-top: 18px;
-      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--light-grey);
+      margin-top: 16px;
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--light-grey); text-align: center;
     }
 
     /* ── STEPS ── */
@@ -259,13 +266,14 @@
   <section class="proc-hero">
     <div class="proc-eyebrow">KOQ Detailing &amp; Coatings &mdash; Queens, NYC</div>
     <h1>THE<br><span>PROCESS</span></h1>
-    <p>We pull up to your driveway fully equipped and leave your car looking like it just rolled off the showroom floor. Here's exactly what that looks like.</p>
+    <p>We pull up to your driveway fully equipped and leave your car looking like it just rolled off the showroom floor.</p>
     <div class="proc-rule"></div>
   </section>
 
   <!-- VIDEO -->
   <section class="proc-video-wrap">
-    <div class="proc-video-label">Watch the full process &mdash; 3 minutes</div>
+    <h2 class="proc-video-heading">Watch the <span>Full Process</span></h2>
+    <div class="proc-video-label">3-minute walkthrough &mdash; filmed in Queens, NY</div>
     <div class="proc-video-outer" id="video-container" onclick="playVideo()">
       <!-- Actual embed (hidden until play) -->
       <iframe
