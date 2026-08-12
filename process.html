@@ -430,7 +430,8 @@
     display:flex;align-items:center;justify-content:space-between;gap:12px;
     padding-top:14px;border-top:1px solid var(--koqsm-line);
   }
-  .koqsm-pricewrap{display:flex;align-items:baseline;gap:9px;}
+  .koqsm-pricewrap{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+  .koqsm-original{font-size:13px;color:var(--koqsm-muted);text-decoration:line-through;line-height:1;}
   .koqsm-price{font-family:var(--koqsm-display);font-size:25px;font-weight:700;}
   .koqsm-dur{font-size:12px;color:var(--koqsm-muted);white-space:nowrap;}
 
@@ -469,7 +470,7 @@
       name:'2 Year Ceramic Coating',
       sub:'Decon + 1-Step Correction + Coating',
       desc:'Full decontamination and a 1-Step Paint Correction, then a professional-grade ceramic coating bonded over the corrected finish. Two years of protection against UV, chemicals and road grime.',
-      price:'$795', duration:'5 hrs',
+      originalPrice:'$995', price:'$795', duration:'5 hrs',
       link:'https://api.leadconnectorhq.com/widget/booking/cX2ku258VTkVTCqXCEQG'
     },
     {
@@ -477,7 +478,7 @@
       name:'5 Year Ceramic Coating',
       sub:'Decon + 1-Step Correction + Premium Coating',
       desc:'Our longest-lasting coating. Same full prep and correction, finished with a thicker, more durable ceramic layer — five years of protection, deeper gloss and stronger water behaviour.',
-      price:'$1,195', duration:'5 hrs',
+      originalPrice:'$1,395', price:'$1,195', duration:'5 hrs',
       link:'https://api.leadconnectorhq.com/widget/booking/daRtezdwkXeTMSVnUDRO',
       feature:true, flag:'Most Protection'
     },
@@ -486,7 +487,7 @@
       name:'Paint Refresh',
       sub:'1-Step Paint Correction',
       desc:'A single-stage machine polish that removes roughly 65 to 70 percent of swirl marks and light defects while boosting gloss. Best for newer vehicles or paint already in decent shape.',
-      price:'$495', duration:'3 hrs',
+      originalPrice:'$595', price:'$495', duration:'3 hrs',
       link:'https://api.leadconnectorhq.com/widget/booking/wI1YhJdGAelMzsVLcWyS'
     },
     {
@@ -494,7 +495,7 @@
       name:'Shine and Protect',
       sub:'1-Step Correction + 6-Month Ceramic Wax',
       desc:'The same single-stage polish, finished with a 6-month ceramic wax so the corrected paint is actually protected. The easiest way to see what a coating does before committing to one.',
-      price:'$595', duration:'3 hrs',
+      originalPrice:'$695', price:'$595', duration:'3 hrs',
       link:'https://api.leadconnectorhq.com/widget/booking/Nzeup53LfSzCG2SxolWC',
       feature:true, flag:'Best Value'
     },
@@ -503,7 +504,7 @@
       name:'Paint Reset',
       sub:'2-Step Paint Correction',
       desc:'A cutting stage followed by a finishing stage. Removes roughly 90 to 95 percent of swirls, scratches and oxidation — the deepest correction we offer on its own.',
-      price:'$795', duration:'3 hrs',
+      originalPrice:'$895', price:'$795', duration:'3 hrs',
       link:'https://api.leadconnectorhq.com/widget/booking/Q6MkIEQ2aR9AtdjQ6KJ4'
     },
     {
@@ -555,6 +556,7 @@
       '<p class="koqsm-desc">' + esc(s.desc) + '</p>' +
       '<div class="koqsm-meta">' +
         '<div class="koqsm-pricewrap">' +
+          (s.originalPrice ? '<div class="koqsm-original">' + esc(s.originalPrice) + '</div>' : '') +
           '<div class="koqsm-price">' + esc(s.price) + '</div>' +
           '<div class="koqsm-dur">' + esc(s.duration) + '</div>' +
         '</div>' +
