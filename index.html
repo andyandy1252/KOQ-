@@ -104,8 +104,9 @@
     .svc-caption-desc { font-size:0.78rem; color:var(--light-grey); line-height:1.6; }
     .service-card h3 { font-family:var(--font-display); font-size:1.5rem; letter-spacing:0.08em; color:var(--white); margin-bottom:12px; }
     .service-card p { font-size:0.88rem; color:var(--light-grey); line-height:1.7; }
-    .service-tag { display:inline-block; margin-top:20px; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(201,168,76,0.3); padding:4px 10px; }
-    .service-more-btn { display:inline-block; margin-top:10px; margin-left:8px; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--black); background:var(--gold); border:none; padding:4px 10px; cursor:pointer; font-family:var(--font-body); transition:background 0.18s ease; vertical-align:middle; }
+    .service-card-tags { display:flex; align-items:center; gap:8px; margin-top:20px; flex-wrap:wrap; }
+    .service-tag { display:inline-block; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(201,168,76,0.3); padding:4px 10px; }
+    .service-more-btn { display:inline-block; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--black); background:var(--gold); border:none; padding:4px 10px; cursor:pointer; font-family:var(--font-body); transition:background 0.18s ease; }
     .service-more-btn:hover { background:var(--gold-light); }
 
     /* WHY */
@@ -312,22 +313,28 @@
       <div class="service-number">01</div>
         <h3>CERAMIC COATING</h3>
       <p>Professional-grade 9H ceramic coating that bonds to your paint at a molecular level. Provides hydrophobic protection, UV resistance, and a deep gloss that lasts years not months.</p>
-      <span class="service-tag">Most Popular</span>
-      <button class="service-more-btn" onclick="KOQServiceMenu.open()">Click here to see more</button>
+      <div class="service-card-tags">
+        <span class="service-tag">Most Popular</span>
+        <button class="service-more-btn" onclick="KOQServiceMenu.open()">Click here to see more</button>
+      </div>
     </div>
     <div class="service-card">
       <div class="service-number">02</div>
         <h3>PAINT CORRECTION</h3>
       <p>Multi-stage machine polishing to remove swirl marks, light scratches, water spots, and oxidation. We restore your paint to a flawless finish before any protective coating is applied.</p>
-      <span class="service-tag">Pre-Coating Prep</span>
-      <button class="service-more-btn" onclick="KOQServiceMenu.open()">Click here to see more</button>
+      <div class="service-card-tags">
+        <span class="service-tag">Pre-Coating Prep</span>
+        <button class="service-more-btn" onclick="KOQServiceMenu.open()">Click here to see more</button>
+      </div>
     </div>
     <div class="service-card">
       <div class="service-number">03</div>
         <h3>FULL DETAIL</h3>
       <p>Complete interior and exterior detailing. Decontamination wash, clay bar treatment, interior deep clean, leather conditioning your car restored inside and out.</p>
-      <span class="service-tag">Interior + Exterior</span>
-      <button class="service-more-btn" onclick="KOQServiceMenu.open()">Click here to see more</button>
+      <div class="service-card-tags">
+        <span class="service-tag">Interior + Exterior</span>
+        <button class="service-more-btn" onclick="KOQServiceMenu.open()">Click here to see more</button>
+      </div>
     </div>
     <div class="service-card">
       <div class="service-number">04</div>
