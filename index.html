@@ -209,9 +209,18 @@
     .footer-links a:hover { color:var(--gold); }
     .footer-copy { font-size:0.72rem; color:#444; }
 
+    /* HAMBURGER */
+    .nav-hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; width:40px; height:40px; padding:8px; background:none; border:none; cursor:pointer; z-index:101; }
+    .nav-hamburger span { display:block; width:24px; height:2px; background:var(--white); border-radius:2px; transition:transform 0.25s ease, opacity 0.25s ease; }
+
     /* MOBILE */
     @media(max-width:900px) {
-      .nav-links { display:none; }
+      .nav-hamburger { display:flex; }
+      .nav-links { display:none; flex-direction:column; position:absolute; top:80px; left:0; right:0; background:rgba(8,8,8,0.97); backdrop-filter:blur(12px); border-bottom:1px solid rgba(201,168,76,0.2); padding:12px 0; gap:0; list-style:none; }
+      .nav-links.open { display:flex; }
+      .nav-links li { width:100%; }
+      .nav-links a { display:block; padding:15px 6%; font-size:0.82rem; letter-spacing:0.18em; border-bottom:1px solid rgba(255,255,255,0.05); }
+      .nav-links li:last-child a { border-bottom:none; }
       #why, #contact { grid-template-columns:1fr; gap:48px; }
       .stats-bar { grid-template-columns:repeat(2,1fr); }
       .cta-band { flex-direction:column; text-align:center; }
@@ -261,6 +270,9 @@
     <li><a href="#marine">Marine</a></li>
     <li><a href="process.html">Process</a></li>
   </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -967,6 +979,16 @@ document.getElementById('booking-modal').addEventListener('click', function(e) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeBookingModal();
 });
+
+// Hamburger menu
+(function() {
+  var btn = document.getElementById('nav-hamburger');
+  var links = document.querySelector('.nav-links');
+  btn.addEventListener('click', function() { links.classList.toggle('open'); });
+  links.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() { links.classList.remove('open'); });
+  });
+})();
 </script>
 
 <!--
