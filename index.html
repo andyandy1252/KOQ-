@@ -292,7 +292,7 @@
     <p class="hero-sub">Mobile ceramic coating specialists based in Queens. We come to you across all 5 boroughs and Long Island bringing showroom-level paint protection to your driveway.</p>
     <div class="hero-actions">
       <button onclick="openBookingModal();fbq('track','ViewContent');" class="btn-primary">See Our Services</button>
-      <button onclick="openLCChat();fbq('track','Lead');" class="btn-primary">Get a Free Quote</button>
+      <button onclick="openLCChat();" class="btn-primary">Get a Free Quote</button>
       <a href="process.html" class="btn-outline">See Our Process</a>
     </div>
   </div>
@@ -401,7 +401,7 @@
     <div class="section-eyebrow">Mobile Service · NYC & Long Island</div>
     <h2>READY TO PROTECT YOUR INVESTMENT?</h2>
   </div>
-  <a href="#home" class="btn-dark" onclick="fbq('track','Lead');">Book a Free Quote</a>
+  <a href="#home" class="btn-dark">Book a Free Quote</a>
 </div>
 
 <!-- AREAS -->
@@ -505,7 +505,7 @@
       <li><span>3</span> We text you a custom quote — fast</li>
     </ul>
     <p style="font-size:0.85rem;color:#999;margin:0;padding-top:8px;border-top:1px solid rgba(201,168,76,0.2);">Ready to get started? <strong style="color:var(--gold);">Fill out the quote form at the top of the website, or click the gold chat bubble in the bottom-right corner.</strong></p>
-    <a href="#home" onclick="fbq('track','Lead');" style="display:block;margin-top:20px;background:var(--gold);color:var(--black);text-align:center;padding:15px 24px;font-family:var(--font-body);font-size:0.75rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;border-radius:4px;">Get a Free Quote</a>
+    <a href="#home" style="display:block;margin-top:20px;background:var(--gold);color:var(--black);text-align:center;padding:15px 24px;font-family:var(--font-body);font-size:0.75rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;border-radius:4px;">Get a Free Quote</a>
   </div>
 </section>
 
@@ -1364,16 +1364,18 @@ document.addEventListener('keydown', function(e) {
 <!-- =================== end KoQ service menu block ====================== -->
 <script>
 (function(){
-  var fired = false;
-  var section = document.getElementById('contact');
-  if (!section || !window.IntersectionObserver) return;
-  new IntersectionObserver(function(entries, obs){
-    if (!fired && entries[0].isIntersecting) {
-      fired = true;
-      fbq('track','Lead');
-      obs.disconnect();
+  var _fetch = window.fetch;
+  window.fetch = function(input, init) {
+    var url = (input && input.url) ? input.url : String(input);
+    var method = (init && init.method) ? init.method.toUpperCase() : 'GET';
+    var p = _fetch.apply(this, arguments);
+    if (method === 'POST' && url.indexOf('leadconnectorhq.com/chat-widget/forms') !== -1) {
+      p.then(function(res) {
+        if (res.ok) fbq('track', 'Lead');
+      });
     }
-  }, { threshold: 0.3 }).observe(section);
+    return p;
+  };
 })();
 </script>
 </body>
