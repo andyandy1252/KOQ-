@@ -291,7 +291,7 @@
     <h1>CERAMIC<span>COATINGS</span>DONE RIGHT.</h1>
     <p class="hero-sub">Mobile ceramic coating specialists based in Queens. We come to you across all 5 boroughs and Long Island bringing showroom-level paint protection to your driveway.</p>
     <div class="hero-actions">
-      <button onclick="openBookingModal();fbq('track','ViewContent');" class="btn-primary">Book Now</button>
+      <button onclick="openBookingModal();fbq('track','ViewContent');" class="btn-primary">See Our Services</button>
       <button onclick="openLCChat();fbq('track','Lead');" class="btn-primary">Get a Free Quote</button>
       <a href="process.html" class="btn-outline">See Our Process</a>
     </div>
@@ -1335,7 +1335,7 @@ document.addEventListener('keydown', function(e) {
     Array.prototype.forEach.call(document.querySelectorAll('button, a'), function(el){
       if (el.closest('.koqsm-overlay')) return;
       var t = (el.textContent || '').trim().toLowerCase();
-      if (t !== 'book now') return;
+      if (t !== 'see our services') return;
       el.addEventListener('click', function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
