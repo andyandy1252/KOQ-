@@ -490,7 +490,7 @@
     <div class="contact-details">
       <div class="contact-item"><div class="contact-icon"></div><div><h4>Based In</h4><p>Queens, New York</p></div></div>
       <div class="contact-item"><div class="contact-icon"></div><div><h4>Service Area</h4><p>All 5 NYC Boroughs<br>Nassau & Suffolk Counties, Long Island</p></div></div>
-      <div class="contact-item"><div class="contact-icon"></div><div><h4>Phone / Text</h4><a href="tel:+16314945388">(631) 494-5388</a></div></div>
+      <div class="contact-item"><div class="contact-icon"></div><div><h4>Phone / Text</h4><a href="tel:+16314945388" onclick="fbq('track','Contact');">(631) 494-5388</a></div></div>
       <div class="contact-item"><div class="contact-icon"></div><div><h4>Instagram</h4><a href="https://instagram.com/koq.coatings" target="_blank">@koq.coatings</a></div></div>
       <div class="contact-item"><div class="contact-icon"></div><div><h4>Email</h4><a href="mailto:koq.detailing@gmail.com">koq.detailing@gmail.com</a></div></div>
     </div>
@@ -1315,6 +1315,7 @@ document.addEventListener('keydown', function(e) {
   function open(){
     build().classList.add('koqsm-open');
     document.body.style.overflow = 'hidden';
+    fbq('track','ViewContent');
   }
 
   function close(){
@@ -1361,5 +1362,19 @@ document.addEventListener('keydown', function(e) {
 })();
 </script>
 <!-- =================== end KoQ service menu block ====================== -->
+<script>
+(function(){
+  var fired = false;
+  var section = document.getElementById('contact');
+  if (!section || !window.IntersectionObserver) return;
+  new IntersectionObserver(function(entries, obs){
+    if (!fired && entries[0].isIntersecting) {
+      fired = true;
+      fbq('track','Lead');
+      obs.disconnect();
+    }
+  }, { threshold: 0.3 }).observe(section);
+})();
+</script>
 </body>
 </html>
