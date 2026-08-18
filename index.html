@@ -1265,7 +1265,7 @@ document.addEventListener('keydown', function(e) {
           '<div class="koqsm-price">' + esc(s.price) + '</div>' +
           '<div class="koqsm-dur">' + esc(s.duration) + '</div>' +
         '</div>' +
-        '<a class="koqsm-book" href="' + esc(s.link) + '" target="_blank" rel="noopener">Book</a>' +
+        '<a class="koqsm-book" href="' + esc(s.link) + '" target="_blank" rel="noopener" onclick="fbq(\'track\',\'InitiateCheckout\',{content_name:\'' + esc(s.name) + '\'});">Book</a>' +
       '</div>' +
     '</article>';
   }
